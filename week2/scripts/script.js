@@ -1,4 +1,4 @@
-var newMessage = "John Cena's mad.";
+var newMessage = "It's the end of the contender.";
 
 var messageTag = document.getElementById("message");
 

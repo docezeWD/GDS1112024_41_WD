@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript LAB</title>
+</head>
+<body>
+    <h1>Universal Button</h1>
+    <h2 id="output">0</h2>
+    <input type="button" id="btn" value="Add Click">
+    <br>
+    <input type="button" id="reset" value="Reset">
+    <br>
+    <input type="button" id="btnre10" value="Remove 10 Clicks">
+    <br>
+    <input type="text" id="upgrade" name="Upgrade">
+    <input type="button" id="up-btn" value="Upgrade Clicks">
+    <script>
+        // in-document javascript
+        var myButton = document.querySelector("#btn");
+        var clickOutput = document.querySelector("#output");
+        var clicks = 0;
+        var resetButton = document.querySelector("#reset");
+        var retenButton = document.querySelector("#btnre10");
+        var clickByAmnt = 1;
+        var clickUpgrade = document.querySelector("#up-btn");
+        // add event listener
+        myButton.addEventListener("click", function(){
+            //alert("OH YEAH");
+            clicks += clickByAmnt;
+            clickOutput.innerHTML = clicks;
+        });
+        resetButton.addEventListener("click", function(){
+            clicks = 0;
+            clickOutput.innerHTML = clicks;
+            clickByAmnt = 1;
+        });
+        retenButton.addEventListener("click", function(){
+            clicks -= 10;
+            clickOutput.innerHTML = clicks;
+        });
+        clickUpgrade.addEventListener("click", function(){
+            clickByAmnt = Number(document.querySelector("#upgrade").value);
+        });
+    </script>
+</body>
+</html>
