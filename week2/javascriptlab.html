@@ -13,8 +13,9 @@
     <br>
     <input type="button" id="btnre10" value="Remove 10 Clicks">
     <br>
-    <input type="text" id="upgrade" name="Upgrade">
-    <input type="button" id="up-btn" value="Upgrade Clicks">
+    <span id="clickmessage"></span>
+    <!--<input type="text" id="upgrade" name="Upgrade">
+    <input type="button" id="up-btn" value="Upgrade Clicks">-->
     <script>
         // in-document javascript
         var myButton = document.querySelector("#btn");
@@ -23,7 +24,9 @@
         var resetButton = document.querySelector("#reset");
         var retenButton = document.querySelector("#btnre10");
         var clickByAmnt = 1;
-        var clickUpgrade = document.querySelector("#up-btn");
+        var messageOne = "Hey! What do you think you're doing?!";
+        var messageShow = document.getElementById("clickmessage");
+        //var clickUpgrade = document.querySelector("#up-btn");
         // add event listener
         myButton.addEventListener("click", function(){
             //alert("OH YEAH");
@@ -36,12 +39,13 @@
             clickByAmnt = 1;
         });
         retenButton.addEventListener("click", function(){
-            clicks -= 10;
+            if (clicks>=10){clicks -= 10;}
+            else {clicks=0};
             clickOutput.innerHTML = clicks;
         });
-        clickUpgrade.addEventListener("click", function(){
-            clickByAmnt = Number(document.querySelector("#upgrade").value);
-        });
+        //clickUpgrade.addEventListener("click", function(){
+            //clickByAmnt = Number(document.querySelector("#upgrade").value);
+        //});
     </script>
 </body>
 </html>
