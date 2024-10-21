@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loops</title>
+</head>
+<body>
+    <script>
+        //Execute code manually three times 
+        console.log(`manual 0`)
+        console.log(`manual 1`)
+        console.log(`manual 2`)
+
+        //A for loop is used when we know the exact number of times we need something to happen
+        for(let i=0; i<3; i++)
+        {
+            console.log(`for ${i}`)
+        }
+
+        //while loops are used when we don't know how many times the statements will execute
+        //This particular while loop works just like a for loop
+
+        let j = 0;
+        while(j<3)
+        {
+            console.log(`while ${j}`)
+            j++
+        }
+
+        /*
+        We can write a function that loops. 
+        This function will call itself if a condition isn't met
+        There is NO NEED for us to do this!
+        The for loop will do the same thing with less code
+        Recursion is when a function calls itself. 
+        It is tricky and dangerous to use recursion because you could easily end up in an infinite loop and break your program. 
+        */
+        let k = 0;
+
+        function loop(limit)
+        {
+            if(k < limit)
+            {
+                console.log(`recursive ${k}`) 
+                k++
+                loop(limit)
+            }
+           
+        }
+
+        loop(3)
+
+        
+
+        
+
+
+
+    </script>
+</body>
+</html>

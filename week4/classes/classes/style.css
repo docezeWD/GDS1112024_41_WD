@@ -1,0 +1,7 @@
+body{
+    display:flex;
+    justify-content: right;
+}
+canvas{
+    border:200px solid black;
+}
