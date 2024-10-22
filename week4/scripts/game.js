@@ -4,27 +4,44 @@ var ctx = canvas.getContext("2d");
 var fps = 1000/60;
 var timer = setInterval(game, fps);
 
-var x = 0;
+
+var rad = 60;
+var h = 50;
+var x = rad+10;
 var y = canvas.height/2;
-var w = 100;
-var h = 100;
-var velo = 1;
+var velox = 5;
+var veloy = 5;
 
 function game(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    
-    if(x<450){
-        velo+=0.5;
-    }
-    else {
-        velo-=1;
+
+    x+=velox;
+    y+=veloy;
+
+    if(x>canvas.width-rad){
+        velox *= -1;
     }
 
-    x+=velo;
+    if(x<rad){
+        velox *= -1;
+    }
 
+
+    if(y>canvas.height-rad){
+        veloy *= -1;
+    }
+
+    if(y<rad){
+        veloy *= -1;
+    }
+    y+=veloy;
 
     ctx.fillStyle = "cyan";
-    ctx.fillRect(x,y,w,h);
+    ctx.beginPath();
+    ctx.arc(x,y,rad,0,Math.PI*2,false);
+    ctx.closePath();
+    ctx.fill();
+    
 }
 
 game();
