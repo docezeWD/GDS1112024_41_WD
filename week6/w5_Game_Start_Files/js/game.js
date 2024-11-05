@@ -24,6 +24,9 @@ var score = 0;
 var gameScenes = ["start", "game", "over"]
 var currentScene = gameScenes[0];
 
+var evil = document.getElementById("evil");
+var guy = document.getElementById("guy");
+
 // generate enemies
 
 var enemies=[];
@@ -111,7 +114,7 @@ function game(){
     //draw the pictures
     for(var i = 0; i<enemies.length; i++){
         enemies[i].move();
-        enemies[i].render();
+        enemies[i].renderImage(evil);
         if(enemies[i].y > (c.height + enemies[i].h)){
             enemies[i].x = rand(0,c.width);
             enemies[i].y = rand(-c.height,0);
@@ -139,7 +142,7 @@ function game(){
     ctx.fillText(`Score: ${score}`,40,80);
 
     player.move();
-    player.render();
+    player.renderImage(guy);
 }
 
 a
