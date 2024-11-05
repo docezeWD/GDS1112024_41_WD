@@ -14,39 +14,70 @@ var timer = setInterval(main, fps)
 /*------------Declare Variables Here--------*/
 var player = new GameObject();
 player.color = "cyan";
-player.w = 40;
-player.h = 80;
+player.w = 120;
+player.h = 50;
 
-var speed = 6;
+var speed = 9;
 var friction = 0.8;
+var score = 0;
+
+var gameScenes = ["start", "game", "over"]
+var currentScene = gameScenes[0];
 
 // generate enemies
 
 var enemies=[];
-var enemyAmnt = 80;
+var enemyAmnt = 15;
 
 for(var i = 0; i<enemyAmnt; i++){
     enemies[i] = new GameObject();
     enemies[i].color = "red";
     enemies[i].h = 30;
     enemies[i].w = 30;
+    enemies[i].vy = 4;
     enemies[i].x = rand(0,c.width);
-    enemies[i].y = rand(0,c.height);
-
+    enemies[i].y = rand(0,100);
 }
 
 
 /*--------------main()------------------------
-This is the function that makes the game work
+This is the function that makes the game work 
+safflower shapeshifter (dogma and the deathwish)
+comfy muzzle
+aftersun
+nova leaves willow
+two-spirit
+yellow with rope
+the monster with 21 faces
+lingkhor
+death comes alone, nayirah
+
 ---------------------------------------------*/
 
 function main()
 {
-    //erases the screen
     ctx.clearRect(0,0,c.width,c.height); 
+    switch(currentScene){
+        case "start":
+            ctx.font = "64px Arial";
+            ctx.fillText(`PRESS W TO START`,60,c.height/2);
+            if(w==true){currentScene="game"}
+            break;
+        case "game":
+            game();
+            if(score>=100){currentScene="over"}
+            break;
+        case "over":
+            ctx.font = "64px Arial";
+            ctx.fillText(`YOU WINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN`,60,c.height/2);
+            break;
 
-    //Any changes to numbers
-    if(a==true || left==true){
+    }
+}
+
+function game(){
+       //Any changes to numbers
+       if(a==true || left==true){
         player.vx = -speed;
     }
     if(d==true || right==true){
@@ -61,15 +92,56 @@ function main()
     player.vx *= friction;
     player.vy *= friction;
 
+    if(player.x >= c.width - player.w/2){
+        player.x = c.width - player.w/2;
+    }
+    if(player.x <= 0 + player.w/2){
+        player.x = 0 + player.w/2;
+    }
+    if(player.y >= c.height - player.h/2){
+        player.y = c.height - player.h/2;
+    }
+    if(player.y <= 0 + player.h/2){
+        player.y = 0 + player.h/2;
+    }
+
+
     //Any collision detection 
 
     //draw the pictures
     for(var i = 0; i<enemies.length; i++){
+        enemies[i].move();
         enemies[i].render();
+        if(enemies[i].y > (c.height + enemies[i].h)){
+            enemies[i].x = rand(0,c.width);
+            enemies[i].y = rand(-c.height,0);
+            if(enemies[i].vy == 4){
+                score++;
+            }
+        }
+        if(enemies[i].y < -enemies[i].h){
+            enemies[i].x = rand(0,c.width);
+            enemies[i].y = rand(-c.height,0);
+            if(enemies[i].vy == -4){
+                score-=10;
+                if(score<0){score=0}
+                enemies[i].vy = 4;
+            }
+        }
+        if(enemies[i].overlaps(player)){
+            enemies[i].vy = -4;
+        }
     }
+
+
+
+    ctx.font = "64px Arial";
+    ctx.fillText(`Score: ${score}`,40,80);
+
     player.move();
     player.render();
 }
+
 a
 //random number generator
 function rand(_low, _high)
@@ -89,26 +161,6 @@ function degrees(_rad)
 }
 /*-------Diagram--------
 
-               /|        c = the hypoteneuse
-            c / |        b = height
-             /  | b      a = width
-            /   |        T = arch tangent angle
-           /T___|
-             a
-
---------------------------
-
-To get a and b (displacement) when you know two points
-  
-    a = destination.x - starting.x
-    b = destination.y - starting.y
-
-To get the total distance (hypotenuese) between two points
-    c = Math.sqrt(_a*_a + _b*_b)
-
-To get the arc tangent angle (labeled T in the diagram)
-    radians = Math.atan2(b, a)
-    
     angelica
     pillar of slime
     solitude redworld
@@ -118,7 +170,4 @@ To get the arc tangent angle (labeled T in the diagram)
     realization of time and place
     angelica radiantz
 
-To find a and b if you know c and T
-    a = Math.cos(T) * c
-    b = Math.sin(T) * c
 */
