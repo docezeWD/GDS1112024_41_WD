@@ -45,16 +45,6 @@ for(var i = 0; i<enemyAmnt; i++){
 
 /*--------------main()------------------------
 This is the function that makes the game work 
-safflower shapeshifter (dogma and the deathwish)
-comfy muzzle
-aftersun
-nova leaves willow
-two-spirit
-yellow with rope
-the monster with 21 faces
-lingkhor
-death comes alone, nayirah
-
 ---------------------------------------------*/
 
 function main()
@@ -73,6 +63,9 @@ function main()
         case "over":
             ctx.font = "64px Arial";
             ctx.fillText(`YOU WINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN`,60,c.height/2);
+            if(w==true){
+                score=0;
+                currentScene="game"}
             break;
 
     }
@@ -119,15 +112,16 @@ function game(){
             enemies[i].x = rand(0,c.width);
             enemies[i].y = rand(-c.height,0);
             if(enemies[i].vy == 4){
-                score++;
+
+                score--;
+                if(score<0){score=0}
             }
         }
         if(enemies[i].y < -enemies[i].h){
             enemies[i].x = rand(0,c.width);
             enemies[i].y = rand(-c.height,0);
             if(enemies[i].vy == -4){
-                score-=10;
-                if(score<0){score=0}
+                score++;
                 enemies[i].vy = 4;
             }
         }
@@ -164,13 +158,5 @@ function degrees(_rad)
 }
 /*-------Diagram--------
 
-    angelica
-    pillar of slime
-    solitude redworld
-    poison stash 99 insertion
-    not true not true
-    swallowed castles
-    realization of time and place
-    angelica radiantz
 
 */
