@@ -9,6 +9,8 @@ var c = document.querySelector(`canvas`)
 var ctx = c.getContext(`2d`)
 var fps = 1000/60
 var timer = setInterval(main, fps)
+var difficulty = ["easy","medium","hard"];
+var currentDifficulty = difficulty[0];
 
 
 /*------------Declare Variables Here--------*/
@@ -55,6 +57,18 @@ function main()
             ctx.font = "64px Arial";
             ctx.fillText(`PRESS W TO START`,60,c.height/2);
             if(w==true){currentScene="game"}
+            ctx.font = "40px Arial";
+            if(d==true && currentDifficulty==difficulty[0]){
+                currentDifficulty=difficulty[1]
+            }
+            if(d==true && currentDifficulty==difficulty[1]){
+                currentDifficulty=difficulty[2]
+            }
+            if(d==true && currentDifficulty==difficulty[2]){
+                currentDifficulty=difficulty[0]
+            }
+            ctx.fillText(`Difficulty: ` + currentDifficulty,60,(c.height/2)+100);
+            console.log(currentDifficulty);
             break;
         case "game":
             game();
@@ -112,16 +126,15 @@ function game(){
             enemies[i].x = rand(0,c.width);
             enemies[i].y = rand(-c.height,0);
             if(enemies[i].vy == 4){
-
-                score--;
-                if(score<0){score=0}
+                score++;
             }
         }
         if(enemies[i].y < -enemies[i].h){
             enemies[i].x = rand(0,c.width);
             enemies[i].y = rand(-c.height,0);
             if(enemies[i].vy == -4){
-                score++;
+                score-=10;
+                if(score<0){score=0}
                 enemies[i].vy = 4;
             }
         }
