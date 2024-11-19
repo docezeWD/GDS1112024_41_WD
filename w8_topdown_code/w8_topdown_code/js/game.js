@@ -31,44 +31,14 @@ function init()
     level.x = 0; 
     level.y = 0;
 
-    wall[0]=new GameObject();
-    wall[0].h = 20;
-    wall[0].w = 800;
-    wall[0].color = `purple`
-    wall[0].x = (c.width/2)+100;
-    wall[0].y = 1100
-    wall[0].world = level
-
-    wall[1]=new GameObject();
-    wall[1].h = 400;
-    wall[1].w = 24;
-    wall[1].color = `purple`
-    wall[1].x = 1900;
-    wall[1].y = c.height/2
-    wall[1].world = level
-
-    wall[2]=new GameObject();
-    wall[2].h = 800;
-    wall[2].w = 24;
-    wall[2].color = `purple`
-    wall[2].x = 1500;
-    wall[2].y = c.height/2
-    wall[2].world = level
-
-    wall[3]=new GameObject();
-    wall[3].w = 400;
-    wall[3].h = 24;
-    wall[3].color = `purple`
-    wall[3].x = (c.width/2)
-    wall[3].y = c.height-1100
-    wall[3].world = level
-
     sword.color = `#000000`;
     sword.x = 100;
     sword.h = 70;
     sword.w = 70;
 
     bad[0]=new GameObject();
+    bad[0].w = 50;
+    bad[0].h = 50;
     bad[0].x = 100;
     bad[0].y = 100;
     bad[0].world = level;
@@ -167,56 +137,7 @@ function game()
     sword.move();
 
     //used to move the level. 
-    var offset = {x:avatar.vx, y:avatar.vy}
 
-    for(let i=0; i<wall.length; i++)
-    {
-        while(wall[i].isOverPoint(avatar.bottom()))
-        {
-            avatar.vy = 0;
-            avatar.y--;
-            offset.y--;
-        }
-        while(wall[i].isOverPoint(avatar.top()))
-        {
-            avatar.vy = 0;
-            avatar.y++;
-            offset.y++;
-        }
-        while(wall[i].isOverPoint(avatar.left()))
-        {
-            avatar.vx = 0;
-            avatar.x++;
-            offset.x++;
-        }
-        while(wall[i].isOverPoint(avatar.right()))
-        {
-            avatar.vx = 0;
-            avatar.x--;
-            offset.x--;
-        }
-        while(wall[i].isOverPoint(sword.bottom()))
-        {
-            sword.vy = 0;
-            sword.y--;
-        }
-        while(wall[i].isOverPoint(sword.top()))
-        {
-            sword.vy = 0;
-            sword.y++;
-        }
-        while(wall[i].isOverPoint(sword.left()))
-        {
-            sword.vx = 0;
-            sword.x++;
-        }
-        while(wall[i].isOverPoint(sword.right()))
-        {
-            sword.vx = 0;
-            sword.x--;
-        }
-    }
-    
     // if(sword.overlaps(bad))
     // {
     //     bad.hp--;
@@ -256,10 +177,6 @@ function game()
         }
         bad[i].render();
     }
-   for(let i=0;i<wall.length; i++)
-   {
-    wall[i].render();
-   }
 
     ctx.beginPath();
     ctx.moveTo(avatar.x,avatar.y)
