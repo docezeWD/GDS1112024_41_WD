@@ -10,13 +10,13 @@ var up = false;
 var down = false;
 var left = false;
 var right = false;
+var r = false;
 
 /*---Key Press Code-----------*/
 
 document.addEventListener(`keydown`, press);
 function press(e)
 {
-    console.log(e.keyCode)
     if(e.keyCode == 87){w = true}
     if(e.keyCode == 83){s = true;}
     if(e.keyCode == 65){a = true;}
@@ -26,6 +26,7 @@ function press(e)
     if(e.keyCode == 37){left = true;}
     if(e.keyCode == 39){right = true;}
     if(e.keyCode == 32){sp = true;}
+    if(e.keyCode == 82){r = true;}
 }
 
 /*---Key Release Code-----------*/
@@ -41,6 +42,7 @@ function release(e)
     if(e.keyCode == 37){left = false;}
     if(e.keyCode == 39){right = false;}
     if(e.keyCode == 32){sp = false;}
+    if(e.keyCode == 82){r = false;}
 }
 
 var mouse = {x:0 ,y:0, pressed:false, world:{x:0,y:0}}

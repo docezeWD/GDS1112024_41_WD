@@ -143,8 +143,6 @@ function game(){
         }
     }
 
-
-
     ctx.font = "64px Arial";
     ctx.fillText(`Score: ${score}`,40,80);
 
